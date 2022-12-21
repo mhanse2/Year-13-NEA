@@ -1,4 +1,10 @@
+# local modules
 import questions
+
+# other modules
+import random
+import guizero
+
 
 def main():
     print('PLACEHOLDER')

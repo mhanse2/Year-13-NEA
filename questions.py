@@ -44,3 +44,19 @@ class Division(Addition):
 
     def calc_ans(self):
         return self.a / self.b
+
+
+'''
+    QUESTION EXPLANATIONS
+    
+    Addition: Addition. 
+        a + b = c
+    Subtraction: Subtraction. Always results in a positive or zero answer. 
+        a - b = c, where a > b.
+    NegativeSubtraction: Subtraction. Always results in a negative or zero answer. 
+        a - b = c, where a < b.
+    Multiplication: Multiplication.
+        a * b = c
+    Division: Division. Given inputs will always result in an integer answer.
+        a / b = c, where a > b and c = int
+'''

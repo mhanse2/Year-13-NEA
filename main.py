@@ -34,7 +34,8 @@ def init_windows():
                              grid=[0,0],
                              enabled=False)
     question_submit = PushButton(question_box,
-                                 text='Submit') # TODO: Add command + arguments
+                                 text='Submit',
+                                 grid=[0,3]) # TODO: Add command + arguments
 
     # Misc UI
     counter = Text(quiz_window,

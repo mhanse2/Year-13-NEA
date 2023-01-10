@@ -1,5 +1,6 @@
 import random
 
+
 class Addition:
     def __init__(self, a, b):
         # all questions take lists as parameters which are then used to pick a random number

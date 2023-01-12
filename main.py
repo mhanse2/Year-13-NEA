@@ -13,6 +13,8 @@ def main():
     quiz_window = ui.QuizWindow(app)
     dummy = questions.Addition([3], [5])
     quiz_window.qtext.value = str(dummy)
+    quiz_window.submit.update_command(command=quiz_window.check_answer,
+                                      args=[dummy.ans])
     app.display()
 
 

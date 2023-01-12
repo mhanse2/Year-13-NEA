@@ -19,7 +19,13 @@ class QuizWindow(Window):
                              enabled=False)
         self.submit = PushButton(master=self,
                                  text='Submit',
-                                 align='top')
+                                 align='top',
+                                 command=self.check_answer)
+        self.feedback = Text(master=self,
+                            text='Correct!',
+                            align='top',
+                            color='red',
+                            visible=False)
 
         # Misc UI
         self.quit = PushButton(master=self,
@@ -29,3 +35,16 @@ class QuizWindow(Window):
                             text='Questions Answered',
                             size=10,
                             align='bottom')
+
+
+    def check_answer(self, ans):
+        if ans == int(self.answer.value):
+            self.feedback.value = 'Correct!'
+        else:
+            self.feedback.value = 'Incorrect.'
+        self.feedback.visible = True
+        self.feedback.after(1500,
+                            self.toggle_feedback)
+
+    def toggle_feedback(self):
+        self.feedback.visible = not self.feedback.visible

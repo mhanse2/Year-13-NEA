@@ -7,25 +7,31 @@ class QuizWindow(Window):
         super().__init__(master, title, width, height, layout, bg, visible)
         self.tk.resizable(0, 0)
 
-        # Main Question UI
-        self.qtext = Text(master=self,
-                          text='i am a question',
-                          align='top')
-        self.answer = TextBox(master=self,
-                              width=20,
-                              align='top')
+        # Main Question UI #
+
+        # Question Image
         self.image = Picture(master=self,
                              align='top',
                              enabled=False)
+        # Question Text
+        self.qtext = Text(master=self,
+                          text='i am a question',
+                          align='top')
+        # Answer Box
+        self.answer = TextBox(master=self,
+                              width=20,
+                              align='top')
+        # Submit Button
         self.submit = PushButton(master=self,
                                  text='Submit',
                                  align='top',
-                                 command=self.check_answer)
+                                 command=self.update_feedback)
+        # Small Feedback Text
         self.feedback = Text(master=self,
-                            text='Correct!',
-                            align='top',
-                            color='red',
-                            visible=False)
+                             size=10,
+                             color='red',
+                             align='top',
+                             visible=False)
 
         # Misc UI
         self.quit = PushButton(master=self,
@@ -36,15 +42,35 @@ class QuizWindow(Window):
                             size=10,
                             align='bottom')
 
+    def update_feedback(self, ans):
+        # compares the given answer to the actual answer
+        try:
+            # if the answer's correct
+            if ans == int(self.answer.value):
+                self.feedback.text_color = 'green'
+                self.feedback.value = 'Correct!'
+            # if the answer's not correct
+            else:
+                self.feedback.text_color = 'red'
+                self.feedback.value = 'Incorrect.'
+            # clears the answer box
+            self.answer.value = ''
 
-    def check_answer(self, ans):
-        if ans == int(self.answer.value):
-            self.feedback.value = 'Correct!'
-        else:
-            self.feedback.value = 'Incorrect.'
+        # only runs if the answer is not an integer
+        except ValueError:
+            self.feedback.text_color = 'goldenrod'
+            self.feedback.value = 'Your answer is not an integer.'
+
         self.feedback.visible = True
         self.feedback.after(1500,
-                            self.toggle_feedback)
+                            self.disable_feedback)
 
-    def toggle_feedback(self):
-        self.feedback.visible = not self.feedback.visible
+    def disable_feedback(self):
+        self.feedback.visible = False
+
+    def set_image(self, image):
+        if image is None:
+            self.image.enabled = False
+        else:
+            self.image.enabled = True
+            self.image.image = image

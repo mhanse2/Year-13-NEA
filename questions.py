@@ -1,4 +1,5 @@
 import random
+import util
 
 
 class Addition:
@@ -7,6 +8,7 @@ class Addition:
         self.a = a[random.randint(0, len(a) - 1)]
         self.b = b[random.randint(0, len(b) - 1)]
         self.ans = self.calc_ans()
+        self.image = None
 
     def __str__(self):
         return f'{self.a} + {self.b}'
@@ -45,6 +47,34 @@ class Division(Addition):
 
     def calc_ans(self):
         return self.a / self.b
+
+
+class Power(Addition):
+    def __str__(self):
+        return f'{self.a}{util.superscript(self.b)}'
+
+    def calc_ans(self):
+        return pow(self.a, self.b)
+
+
+class Root(Power):
+    def __str__(self):
+        return f'{util.superscript(self.b) if self.b != 2 else ""}√{self.a}'
+
+    def calc_ans(self):
+        return pow(self.a, 1/self.b)
+
+
+class Triangle(Addition):
+    def __init__(self, a, b):
+        super().__init__(a, b)
+        self.image = 'images/triangle.png'
+
+    def __str__(self):
+        return f'a = {self.a} & b = {self.b}\nWhat is the area of this right-angled triangle?'
+
+    def calc_ans(self):
+        return (self.a * self.b) / 2
 
 
 '''

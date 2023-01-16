@@ -15,7 +15,7 @@ class QuizWindow(Window):
                              enabled=False)
         # Question Text
         self.qtext = Text(master=self,
-                          text='your code isn\'t working bozo',
+                          text='your code isn\'t working bozo',  # a very polite error catch
                           align='top')
         # Answer Box
         self.answer = TextBox(master=self,
@@ -47,6 +47,7 @@ class QuizWindow(Window):
 
     def update_question(self, ques):
         # sets the question itself
+        print(str(ques))
         self.qtext.value = str(ques)
         # checks if the question has an image
         if ques.image is None:
@@ -71,14 +72,20 @@ class QuizWindow(Window):
             # clears the answer box
             self.answer.value = ''
 
-        # only runs if the answer is not an integer
+        # runs if the answer is not an integer
         except ValueError:
             self.feedback.text_color = 'goldenrod'
             self.feedback.value = 'Your answer is not an integer.'
 
-        self.feedback.visible = True
-        self.feedback.after(1500,
-                            self._disable_feedback)
+        # runs if there is nothing inputted into the answer box
+        except TypeError:
+            self.feedback.text_color = 'goldenrod'
+            self.feedback.value = "You didn't write an answer."
+
+        finally:
+            self.feedback.visible = True
+            self.feedback.after(1500,
+                                self._disable_feedback)
 
     def _disable_feedback(self):
         self.feedback.visible = False

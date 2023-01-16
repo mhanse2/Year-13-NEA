@@ -7,7 +7,19 @@ import random
 
 class QuestionQueue:
     def __init__(self, level):
-        pass # TODO: generate a list of questions based on the level
+        self.queue = [Addition([4], [5]), Subtraction([2], [6]), Triangle([4], [4])]
+        self.finished = []
+        self.current = self.queue[0]
+
+    def next_question(self):
+        q = self.queue.pop(0)
+        self.finished.append(q)
+        self._generate_question(q)
+        self.current = self.queue[0]
+
+    def _generate_question(self, old):
+        self.queue.append(Addition([1], [1]))
+        # TODO
 
 
 class Addition:

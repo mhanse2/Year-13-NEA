@@ -1,5 +1,13 @@
-import random
+# local modules
 import util
+
+# other modules
+import random
+
+
+class QuestionQueue:
+    def __init__(self, level):
+        pass # TODO: generate a list of questions based on the level
 
 
 class Addition:

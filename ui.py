@@ -15,7 +15,7 @@ class QuizWindow(Window):
                              enabled=False)
         # Question Text
         self.qtext = Text(master=self,
-                          text='i am a question',
+                          text='your code isn\'t working bozo',
                           align='top')
         # Answer Box
         self.answer = TextBox(master=self,
@@ -33,14 +33,29 @@ class QuizWindow(Window):
                              align='top',
                              visible=False)
 
-        # Misc UI
+        # Misc UI #
+
+        # Save & Quit Button
         self.quit = PushButton(master=self,
                                text='Save & Quit',
                                align='bottom')
+        # Counter 
         self.counter = Text(master=self,
                             text='Questions Answered',
                             size=10,
                             align='bottom')
+
+    def update_question(self, ques):
+        # sets the question itself
+        self.qtext.value = str(ques)
+        # checks if the question has an image
+        if ques.image is None:
+            # if it doesn't, disable the image object
+            self.image.enabled = False
+        else:
+            # if it does, enable the image object and set the image to the question's
+            self.image.enabled = True
+            self.image.image = ques.image
 
     def update_feedback(self, ans):
         # compares the given answer to the actual answer
@@ -63,14 +78,7 @@ class QuizWindow(Window):
 
         self.feedback.visible = True
         self.feedback.after(1500,
-                            self.disable_feedback)
+                            self._disable_feedback)
 
-    def disable_feedback(self):
+    def _disable_feedback(self):
         self.feedback.visible = False
-
-    def set_image(self, image):
-        if image is None:
-            self.image.enabled = False
-        else:
-            self.image.enabled = True
-            self.image.image = image

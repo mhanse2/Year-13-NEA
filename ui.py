@@ -15,7 +15,7 @@ class QuizWindow(Window):
                              enabled=False)
         # Question Text
         self.qtext = Text(master=self,
-                          text='your code isn\'t working bozo',  # a very polite error catch
+                          text='your code isn\'t working',  # a very polite error catch
                           align='top')
         # Answer Box
         self.answer = TextBox(master=self,

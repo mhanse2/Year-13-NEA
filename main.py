@@ -1,6 +1,7 @@
 # local modules
 import questions
 import ui
+import queue
 
 # other modules
 import random
@@ -10,7 +11,7 @@ from guizero import *
 app = App('Mental Maths Quiz [App]', 600, 500)    # loads the app
 app.tk.resizable(0, 0)    # makes the window unable to be resized
 quiz_window = ui.QuizWindow(app)    # creates the quiz's window
-cur_queue = questions.QuestionQueue(1)
+cur_queue = queue.QuestionQueue(1)
 app.display()
 
 
